@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 
+const API_URL = "https://nihongo-talk-production.up.railway.app";
+
 function Login() {
   const navigate = useNavigate();
 
@@ -30,7 +32,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5001/api/auth/login",
+        `${API_URL}/api/auth/login`,
         {
           method: "POST",
           headers: {
@@ -74,9 +76,7 @@ function Login() {
       <div className="auth-card">
 
         {/* Logo */}
-
         <div className="auth-logo">
-
           <span className="logo-mark">
             日
           </span>
@@ -84,12 +84,9 @@ function Login() {
           <span>
             Nihongo Talk Trainer
           </span>
-
         </div>
 
-
         {/* Title */}
-
         <h1>
           Welcome back
         </h1>
@@ -98,9 +95,7 @@ function Login() {
           Continue your Japanese conversation practice.
         </p>
 
-
         {/* Error */}
-
         {error && (
           <div
             style={{
@@ -116,15 +111,11 @@ function Login() {
           </div>
         )}
 
-
         {/* Login Form */}
-
         <form onSubmit={handleSubmit}>
 
           {/* Email */}
-
           <div className="form-group">
-
             <label htmlFor="email">
               Email
             </label>
@@ -138,14 +129,10 @@ function Login() {
               onChange={handleChange}
               required
             />
-
           </div>
 
-
           {/* Password */}
-
           <div className="form-group">
-
             <label htmlFor="password">
               Password
             </label>
@@ -159,12 +146,9 @@ function Login() {
               onChange={handleChange}
               required
             />
-
           </div>
 
-
           {/* Submit */}
-
           <button
             type="submit"
             className="auth-submit"
@@ -177,22 +161,16 @@ function Login() {
 
         </form>
 
-
         {/* Register */}
-
         <p className="auth-switch">
-
           Don't have an account?{" "}
 
           <Link to="/register">
             Create account
           </Link>
-
         </p>
 
-
         {/* Home */}
-
         <Link
           to="/"
           className="back-home"
