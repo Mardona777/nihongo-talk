@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Conversation.css";
 
-const API_URL = "http://127.0.0.1:5001";
+const API_URL = "https://nihongo-talk-production.up.railway.app";
 
 const TOTAL_QUESTIONS = 20;
 
@@ -64,15 +64,10 @@ function Conversation() {
   // ========================================
 
   const [questions, setQuestions] = useState([]);
-
   const [currentStep, setCurrentStep] = useState(0);
-
   const [answer, setAnswer] = useState("");
-
   const [score, setScore] = useState(null);
-
   const [feedback, setFeedback] = useState("");
-
   const [scores, setScores] = useState([]);
 
   const [isLoadingQuestions, setIsLoadingQuestions] =
@@ -91,8 +86,7 @@ function Conversation() {
   // CURRENT QUESTION
   // ========================================
 
-  const currentQuestion =
-    questions[currentStep];
+  const currentQuestion = questions[currentStep];
 
   // ========================================
   // LOAD 20 AI QUESTIONS
@@ -114,27 +108,12 @@ function Conversation() {
         setScore(null);
         setFeedback("");
 
-        console.log(
-          "========================================"
-        );
-
-        console.log(
-          "Loading 20 AI questions..."
-        );
-
-        console.log(
-          "Scenario:",
-          scenarioId
-        );
-
-        console.log(
-          "Level:",
-          scenario.level
-        );
-
-        console.log(
-          "========================================"
-        );
+        console.log("========================================");
+        console.log("Loading 20 AI questions...");
+        console.log("Scenario:", scenarioId);
+        console.log("Level:", scenario.level);
+        console.log("API URL:", API_URL);
+        console.log("========================================");
 
         const response = await fetch(
           `${API_URL}/api/ai/questions`,
@@ -148,16 +127,12 @@ function Conversation() {
             body: JSON.stringify({
               scenario: scenarioId,
               level: scenario.level,
-
-              // IMPORTANT:
-              // 20 ta savol so'rayapmiz
               count: TOTAL_QUESTIONS,
             }),
           }
         );
 
-        const responseText =
-          await response.text();
+        const responseText = await response.text();
 
         console.log(
           "AI questions response:",
@@ -207,34 +182,26 @@ function Conversation() {
         const normalizedQuestions =
           generatedQuestions
             .map((question) => {
-              if (
-                typeof question === "string"
-              ) {
+              if (typeof question === "string") {
                 return {
-                  japanese:
-                    question.trim(),
-
+                  japanese: question.trim(),
                   translation: "",
-
                   expected: "",
                 };
               }
 
               return {
-                japanese:
-                  (
-                    question.japanese ||
-                    question.question ||
-                    ""
-                  ).trim(),
+                japanese: (
+                  question.japanese ||
+                  question.question ||
+                  ""
+                ).trim(),
 
                 translation:
-                  question.translation ||
-                  "",
+                  question.translation || "",
 
                 expected:
-                  question.expected ||
-                  "",
+                  question.expected || "",
               };
             })
             .filter(
@@ -247,12 +214,9 @@ function Conversation() {
         // ========================================
 
         const uniqueQuestions = [];
-
         const seen = new Set();
 
-        for (
-          const question of normalizedQuestions
-        ) {
+        for (const question of normalizedQuestions) {
           const normalized =
             question.japanese
               .trim()
@@ -264,10 +228,7 @@ function Conversation() {
             !seen.has(normalized)
           ) {
             seen.add(normalized);
-
-            uniqueQuestions.push(
-              question
-            );
+            uniqueQuestions.push(question);
           }
         }
 
@@ -304,21 +265,10 @@ function Conversation() {
             TOTAL_QUESTIONS
           );
 
-        console.log(
-          "========================================"
-        );
-
-        console.log(
-          "FINAL 20 QUESTIONS:"
-        );
-
-        console.log(
-          finalQuestions
-        );
-
-        console.log(
-          "========================================"
-        );
+        console.log("========================================");
+        console.log("FINAL 20 QUESTIONS:");
+        console.log(finalQuestions);
+        console.log("========================================");
 
         setQuestions(finalQuestions);
       } catch (error) {
@@ -347,9 +297,7 @@ function Conversation() {
       return;
     }
 
-    if (
-      !("speechSynthesis" in window)
-    ) {
+    if (!("speechSynthesis" in window)) {
       alert(
         "Your browser does not support Japanese voice playback."
       );
@@ -365,9 +313,7 @@ function Conversation() {
       );
 
     utterance.lang = "ja-JP";
-
     utterance.rate = 0.9;
-
     utterance.pitch = 1;
 
     window.speechSynthesis.speak(
@@ -396,11 +342,8 @@ function Conversation() {
       new SpeechRecognition();
 
     recognition.lang = "ja-JP";
-
     recognition.continuous = false;
-
     recognition.interimResults = false;
-
     recognition.maxAlternatives = 1;
 
     recognition.onstart = () => {
@@ -417,7 +360,6 @@ function Conversation() {
       );
 
       setAnswer(recognizedText);
-
       setIsListening(false);
     };
 
@@ -480,8 +422,7 @@ function Conversation() {
           method: "POST",
 
           headers: {
-            "Content-Type":
-              "application/json",
+            "Content-Type": "application/json",
           },
 
           body: JSON.stringify({
@@ -543,9 +484,7 @@ function Conversation() {
         Number(data.score);
 
       const finalScore =
-        Number.isFinite(
-          receivedScore
-        )
+        Number.isFinite(receivedScore)
           ? Math.max(
               0,
               Math.min(
@@ -581,9 +520,7 @@ function Conversation() {
           ? 80
           : 50;
 
-      setScore(
-        fallbackScore
-      );
+      setScore(fallbackScore);
 
       setFeedback(
         "Your answer has been recorded. Keep practicing!"
@@ -620,9 +557,7 @@ function Conversation() {
       currentStep <
       questions.length - 1
     ) {
-      setScores(
-        updatedScores
-      );
+      setScores(updatedScores);
 
       setCurrentStep(
         (previous) =>
@@ -630,9 +565,7 @@ function Conversation() {
       );
 
       setAnswer("");
-
       setScore(null);
-
       setFeedback("");
 
       window.scrollTo({
@@ -658,9 +591,7 @@ function Conversation() {
 
   const tryAgain = () => {
     setAnswer("");
-
     setScore(null);
-
     setFeedback("");
   };
 
@@ -676,13 +607,9 @@ function Conversation() {
       "loginUser",
     ];
 
-    for (
-      const key of possibleKeys
-    ) {
+    for (const key of possibleKeys) {
       const storedUser =
-        localStorage.getItem(
-          key
-        );
+        localStorage.getItem(key);
 
       if (!storedUser) {
         continue;
@@ -690,9 +617,7 @@ function Conversation() {
 
       try {
         const parsedUser =
-          JSON.parse(
-            storedUser
-          );
+          JSON.parse(storedUser);
 
         if (parsedUser) {
           return parsedUser;
@@ -761,8 +686,7 @@ function Conversation() {
       const totalScore =
         finalScores.reduce(
           (total, item) =>
-            total +
-            Number(item),
+            total + Number(item),
           0
         );
 
@@ -804,14 +728,11 @@ function Conversation() {
       // ========================================
 
       const practiceData = {
-        user_id:
-          Number(userId),
+        user_id: Number(userId),
 
-        scenario:
-          scenarioId,
+        scenario: scenarioId,
 
-        score:
-          averageScore,
+        score: averageScore,
 
         total_steps:
           finalScores.length,
@@ -881,9 +802,7 @@ function Conversation() {
         `Practice completed! 🎉\n\n20 questions completed!\n\nYour score: ${averageScore}/100`
       );
 
-      navigate(
-        "/dashboard"
-      );
+      navigate("/dashboard");
     } catch (error) {
       console.error(
         "FINISH PRACTICE ERROR:",
