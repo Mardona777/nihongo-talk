@@ -1,0 +1,656 @@
+
+
+.dashboard-page {
+  min-height: 100vh;
+  background: #fffaf8;
+  color: #1b1720;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.dashboard-header {
+  height: 76px;
+  padding: 0 7%;
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #ffffff;
+  border-bottom: 1px solid #eadfdf;
+}
+
+.dashboard-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #1b1720;
+  text-decoration: none;
+
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.dashboard-logo:hover {
+  color: #c94f68;
+}
+
+.logo-mark {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #1b1720;
+  color: #ffffff;
+
+  font-size: 18px;
+}
+
+
+/* ========================================
+   USER
+======================================== */
+
+.dashboard-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #514951;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f3e5e8;
+  color: #a53d55;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.dashboard-user-name {
+  font-weight: 700;
+}
+
+.dashboard-logout {
+  margin-left: 8px;
+
+  padding: 7px 12px;
+
+  border: 1px solid #ead7da;
+  border-radius: 7px;
+
+  background: #ffffff;
+  color: #a53d55;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.dashboard-logout:hover {
+  background: #f8edef;
+}
+
+
+/* ========================================
+   MAIN
+======================================== */
+
+.dashboard-main {
+  width: 100%;
+  max-width: 1120px;
+
+  margin: 0 auto;
+
+  padding: 60px 30px 90px;
+
+  box-sizing: border-box;
+}
+
+
+/* ========================================
+   WELCOME
+======================================== */
+
+.welcome-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 40px;
+}
+
+.dashboard-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #c94f68;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.welcome-section h1 {
+  margin: 0 0 10px;
+
+  color: #1b1720;
+
+  font-size: 38px;
+  line-height: 1.2;
+}
+
+.welcome-section p {
+  margin: 0;
+
+  color: #777078;
+
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+/* ========================================
+   LEVEL BADGE
+======================================== */
+
+.level-badge {
+  min-width: 130px;
+
+  padding: 16px 20px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  background: #f3e5e8;
+
+  border-radius: 14px;
+}
+
+.level-badge span {
+  margin-bottom: 5px;
+
+  color: #918991;
+
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.level-badge strong {
+  color: #a53d55;
+
+  font-size: 27px;
+}
+
+
+/* ========================================
+   STATISTICS
+======================================== */
+
+.stats-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 15px;
+
+  margin-bottom: 55px;
+}
+
+.stat-card {
+  min-height: 105px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  background: #ffffff;
+
+  border: 1px solid #eadfdf;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 10px 30px rgba(40, 25, 35, 0.04);
+}
+
+.stat-icon {
+  width: 43px;
+  height: 43px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f8edef;
+
+  border-radius: 11px;
+
+  font-size: 20px;
+}
+
+.stat-card div {
+  min-width: 0;
+}
+
+.stat-card div span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #918991;
+
+  font-size: 11px;
+}
+
+.stat-card strong {
+  color: #1b1720;
+
+  font-size: 21px;
+}
+
+
+/* ========================================
+   SECTION TITLE
+======================================== */
+
+.section-title {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 25px;
+}
+
+.section-title h2 {
+  margin: 0 0 7px;
+
+  color: #1b1720;
+
+  font-size: 25px;
+}
+
+.section-title p {
+  margin: 0;
+
+  color: #777078;
+
+  font-size: 13px;
+}
+
+.view-all-btn {
+  flex-shrink: 0;
+
+  color: #a53d55;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.view-all-btn:hover {
+  color: #c94f68;
+}
+
+
+/* ========================================
+   PRACTICE
+======================================== */
+
+.practice-section {
+  margin-bottom: 60px;
+}
+
+.dashboard-scenarios {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 15px;
+}
+
+.dashboard-scenario-card {
+  min-height: 120px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  position: relative;
+
+  background: #ffffff;
+
+  border: 1px solid #eadfdf;
+
+  border-radius: 15px;
+
+  color: #1b1720;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 10px 30px rgba(40, 25, 35, 0.04);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.dashboard-scenario-card:hover {
+  transform: translateY(-4px);
+
+  border-color: #dfbbc3;
+
+  box-shadow:
+    0 16px 35px rgba(40, 25, 35, 0.08);
+}
+
+.scenario-emoji {
+  width: 52px;
+  height: 52px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #f8edef;
+
+  border-radius: 14px;
+
+  font-size: 25px;
+}
+
+.dashboard-scenario-card > div {
+  flex: 1;
+}
+
+.scenario-level {
+  display: inline-block;
+
+  margin-bottom: 5px;
+
+  color: #c94f68;
+
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.dashboard-scenario-card h3 {
+  margin: 0 0 3px;
+
+  font-size: 18px;
+}
+
+.dashboard-scenario-card p {
+  margin: 0;
+
+  color: #918991;
+
+  font-size: 12px;
+}
+
+.scenario-arrow {
+  color: #a53d55;
+
+  font-size: 20px;
+  font-weight: 700;
+}
+
+
+/* ========================================
+   RECENT HISTORY
+======================================== */
+
+.recent-section {
+  margin-top: 10px;
+}
+
+.empty-history {
+  padding: 45px 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px solid #eadfdf;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 10px 30px rgba(40, 25, 35, 0.04);
+}
+
+.empty-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 15px;
+
+  background: #f8edef;
+
+  border-radius: 50%;
+
+  font-size: 25px;
+}
+
+.empty-history h3 {
+  margin: 0 0 8px;
+
+  font-size: 17px;
+}
+
+.empty-history p {
+  max-width: 450px;
+
+  margin: 0 0 20px;
+
+  color: #918991;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+.start-practice-btn {
+  padding: 11px 18px;
+
+  border-radius: 8px;
+
+  background: #1b1720;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  transition: 0.2s ease;
+}
+
+.start-practice-btn:hover {
+  background: #c94f68;
+}
+
+
+/* ========================================
+   LOADING
+======================================== */
+
+.dashboard-loading {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fffaf8;
+
+  color: #1b1720;
+
+  font-size: 16px;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+
+  .dashboard-main {
+    padding: 50px 22px 70px;
+  }
+
+  .stats-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-scenarios {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+  .dashboard-header {
+    height: 68px;
+
+    padding: 0 18px;
+  }
+
+  .dashboard-logo {
+    font-size: 14px;
+  }
+
+  .logo-mark {
+    width: 35px;
+    height: 35px;
+
+    font-size: 16px;
+  }
+
+  .dashboard-user-name {
+    display: none;
+  }
+
+  .dashboard-logout {
+    margin-left: 3px;
+
+    padding: 6px 9px;
+  }
+
+  .dashboard-main {
+    padding: 40px 18px 60px;
+  }
+
+  .welcome-section {
+    flex-direction: column;
+
+    margin-bottom: 32px;
+  }
+
+  .welcome-section h1 {
+    font-size: 30px;
+  }
+
+  .level-badge {
+    width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+
+    margin-bottom: 45px;
+  }
+
+  .section-title {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .section-title h2 {
+    font-size: 23px;
+  }
+
+  .dashboard-scenarios {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-scenario-card {
+    min-height: 105px;
+  }
+
+  .empty-history {
+    padding: 35px 18px;
+  }
+}
