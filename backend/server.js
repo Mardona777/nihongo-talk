@@ -7,7 +7,8 @@ const OpenAI = require("openai");
 const db = require("./db");
 
 const app = express();
-const PORT = 5001;
+
+const PORT = process.env.PORT || 5001;
 
 // ========================================
 // OPENAI
@@ -930,10 +931,10 @@ app.use((error, req, res, next) => {
 
 app.listen(
   PORT,
-  "127.0.0.1",
+  "0.0.0.0",
   () => {
     console.log(
-      `Backend running at http://127.0.0.1:${PORT}`
+      `Backend running on port ${PORT}`
     );
 
     console.log(
