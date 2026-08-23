@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Conversation.css";
 
 const API_URL = "https://nihongo-talk-production.up.railway.app";
-
 const TOTAL_QUESTIONS = 20;
 
 const scenarioData = {
