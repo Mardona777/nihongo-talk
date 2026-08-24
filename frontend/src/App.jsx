@@ -6,11 +6,11 @@ import {
   Link,
 } from "react-router-dom";
 
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import Scenarios from "./pages/Scenarios";
-import Conversation from "./pages/Conversation";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import Dashboard from "./pages/dashboard";
+import Scenarios from "./pages/scenarios";
+import Conversation from "./pages/conversation";
 
 import "./App.css";
 

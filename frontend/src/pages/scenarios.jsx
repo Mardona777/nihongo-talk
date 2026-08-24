@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "./Scenarios.css";
+import "./scenarios.css";
 
 const scenarios = [
   {

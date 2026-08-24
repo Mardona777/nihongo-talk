@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css";
+import "./login.css";
 
 const API_URL = "https://nihongo-talk-production.up.railway.app";
 
