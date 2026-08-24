@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.css";
 
+const API_URL =
+  "https://nihongo-talk-production.up.railway.app";
+
 function Register() {
   const navigate = useNavigate();
 
@@ -34,12 +37,14 @@ function Register() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5001/api/auth/register",
+        `${API_URL}/api/auth/register`,
         {
           method: "POST",
+
           headers: {
             "Content-Type": "application/json",
           },
+
           body: JSON.stringify(formData),
         }
       );
@@ -52,15 +57,20 @@ function Register() {
         );
       }
 
-      setMessage(data.message);
+      setMessage(
+        data.message ||
+          "Account created successfully!"
+      );
 
       // Account successfully created
       setTimeout(() => {
         navigate("/login");
       }, 1500);
-
     } catch (error) {
-      console.error("Register error:", error);
+      console.error(
+        "Register error:",
+        error
+      );
 
       setError(
         error.message ||
@@ -76,9 +86,7 @@ function Register() {
       <div className="auth-card">
 
         {/* Logo */}
-
         <div className="auth-logo">
-
           <span className="logo-mark">
             日
           </span>
@@ -86,23 +94,19 @@ function Register() {
           <span>
             Nihongo Talk Trainer
           </span>
-
         </div>
 
-
         {/* Title */}
-
         <h1>
           Create your account
         </h1>
 
         <p className="auth-subtitle">
-          Start practicing Japanese conversation today.
+          Start practicing Japanese
+          conversation today.
         </p>
 
-
         {/* Success message */}
-
         {message && (
           <div
             style={{
@@ -118,9 +122,7 @@ function Register() {
           </div>
         )}
 
-
         {/* Error message */}
-
         {error && (
           <div
             style={{
@@ -136,15 +138,11 @@ function Register() {
           </div>
         )}
 
-
         {/* Register Form */}
-
         <form onSubmit={handleSubmit}>
 
           {/* Name */}
-
           <div className="form-group">
-
             <label htmlFor="name">
               Full Name
             </label>
@@ -158,14 +156,10 @@ function Register() {
               onChange={handleChange}
               required
             />
-
           </div>
 
-
           {/* Email */}
-
           <div className="form-group">
-
             <label htmlFor="email">
               Email
             </label>
@@ -179,14 +173,10 @@ function Register() {
               onChange={handleChange}
               required
             />
-
           </div>
 
-
           {/* Password */}
-
           <div className="form-group">
-
             <label htmlFor="password">
               Password
             </label>
@@ -198,17 +188,13 @@ function Register() {
               placeholder="••••••••"
               value={formData.password}
               onChange={handleChange}
-              minLength="6"
+              minLength={6}
               required
             />
-
           </div>
 
-
           {/* Japanese Level */}
-
           <div className="form-group">
-
             <label htmlFor="level">
               Japanese Level
             </label>
@@ -220,8 +206,10 @@ function Register() {
               onChange={handleChange}
               required
             >
-
-              <option value="" disabled>
+              <option
+                value=""
+                disabled
+              >
                 Select your level
               </option>
 
@@ -244,14 +232,10 @@ function Register() {
               <option value="N1">
                 N1 - Advanced
               </option>
-
             </select>
-
           </div>
 
-
           {/* Submit */}
-
           <button
             type="submit"
             className="auth-submit"
@@ -264,22 +248,16 @@ function Register() {
 
         </form>
 
-
         {/* Login link */}
-
         <p className="auth-switch">
-
           Already have an account?{" "}
 
           <Link to="/login">
             Login
           </Link>
-
         </p>
 
-
         {/* Home link */}
-
         <Link
           to="/"
           className="back-home"
