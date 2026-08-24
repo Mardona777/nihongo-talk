@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./Conversation.css";
+import "./conversation.css";
 
 const API_URL = "https://nihongo-talk-production.up.railway.app";
 const TOTAL_QUESTIONS = 20;
