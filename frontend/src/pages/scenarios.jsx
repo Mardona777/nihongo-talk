@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./scenarios.css";
 
 const scenarios = [
@@ -60,6 +61,103 @@ const scenarios = [
 ];
 
 function Scenarios() {
+  const navigate = useNavigate();
+
+  // ========================================
+  // AUTHENTICATION
+  // ========================================
+
+  const [isAuthenticated, setIsAuthenticated] =
+    useState(false);
+
+  const [authChecking, setAuthChecking] =
+    useState(true);
+
+  // ========================================
+  // CHECK LOGIN
+  // ========================================
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+
+    // User login qilmagan
+    if (!storedUser) {
+      navigate("/login", { replace: true });
+      return;
+    }
+
+    try {
+      const parsedUser = JSON.parse(storedUser);
+
+      // User ma'lumoti noto'g'ri
+      if (!parsedUser || !parsedUser.id) {
+        localStorage.removeItem("user");
+
+        navigate("/login", {
+          replace: true,
+        });
+
+        return;
+      }
+
+      // User login qilgan
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error(
+        "Could not read logged-in user:",
+        error
+      );
+
+      localStorage.removeItem("user");
+
+      navigate("/login", {
+        replace: true,
+      });
+    } finally {
+      setAuthChecking(false);
+    }
+  }, [navigate]);
+
+  // ========================================
+  // CHECKING LOGIN
+  // ========================================
+
+  if (authChecking) {
+    return (
+      <div className="scenarios-page">
+        <main className="scenarios-main">
+          <div className="scenarios-help">
+            <div className="help-icon">
+              🔐
+            </div>
+
+            <div>
+              <h3>
+                Checking your account...
+              </h3>
+
+              <p>
+                Please wait a moment.
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // ========================================
+  // NOT LOGGED IN
+  // ========================================
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  // ========================================
+  // RENDER
+  // ========================================
+
   return (
     <div className="scenarios-page">
 
@@ -82,7 +180,6 @@ function Scenarios() {
           </span>
         </Link>
 
-
         <Link
           to="/dashboard"
           className="back-dashboard"
@@ -92,14 +189,15 @@ function Scenarios() {
 
       </header>
 
-
       {/* ================================
           MAIN
       ================================= */}
 
       <main className="scenarios-main">
 
-        {/* INTRO */}
+        {/* ================================
+            INTRO
+        ================================= */}
 
         <section className="scenarios-intro">
 
@@ -114,14 +212,14 @@ function Scenarios() {
             </h1>
 
             <p>
-              Practice Japanese conversation through
-              realistic everyday situations.
+              Practice Japanese conversation
+              through realistic everyday
+              situations.
             </p>
 
           </div>
 
         </section>
-
 
         {/* ================================
             SCENARIO GRID
@@ -150,7 +248,6 @@ function Scenarios() {
 
               </div>
 
-
               {/* CARD CONTENT */}
 
               <div className="scenario-card-content">
@@ -167,7 +264,6 @@ function Scenarios() {
                   {scenario.description}
                 </p>
 
-
                 <div className="scenario-info">
 
                   <span>
@@ -181,7 +277,6 @@ function Scenarios() {
                 </div>
 
               </div>
-
 
               {/* START BUTTON */}
 
@@ -198,7 +293,6 @@ function Scenarios() {
           ))}
 
         </section>
-
 
         {/* ================================
             BOTTOM INFO
@@ -217,9 +311,9 @@ function Scenarios() {
             </h3>
 
             <p>
-              Choose a situation and start a Japanese
-              conversation. Listen, speak, and improve
-              step by step.
+              Choose a situation and start a
+              Japanese conversation. Listen,
+              speak, and improve step by step.
             </p>
 
           </div>
