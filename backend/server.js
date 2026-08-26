@@ -9,6 +9,7 @@ const db = require("./db");
 const app = express();
 
 const PORT = process.env.PORT || 5001;
+
 // ========================================
 // OPENAI
 // ========================================
@@ -41,12 +42,12 @@ app.get("/", (req, res) => {
 // HEALTH CHECK
 // ========================================
 
-app.get("/api/health", (req, res) => {
-  res.json({
-    success: true,
-    message: "Backend connected successfully!",
-  });
-});
+// app.get("/api/health", (req, res) => {
+//   res.json({
+//     success: true,
+//     message: "Backend connected successfully!",
+//   });
+// });
 
 // ========================================
 // REGISTER
@@ -54,6 +55,7 @@ app.get("/api/health", (req, res) => {
 
 app.post("/api/auth/register", async (req, res) => {
   try {
+    console.log("REGISTER REQUEST:", req.body);
     const { name, email, password, level } = req.body;
 
     if (!name || !email || !password || !level) {
