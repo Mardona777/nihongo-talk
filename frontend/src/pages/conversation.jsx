@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./conversation.css";
 
-const API_URL = "https://nihongo-talk-production.up.railway.app";
+const API_URL =
+  "https://nihongo-talk-production.up.railway.app";
+
 const TOTAL_QUESTIONS = 20;
 
 const scenarioData = {
@@ -59,6 +61,47 @@ function Conversation() {
   const scenario = scenarioData[scenarioId];
 
   // ========================================
+  // LOGIN PROTECTION
+  // ========================================
+
+  const [isAuthenticated, setIsAuthenticated] =
+    useState(false);
+
+  const [authChecking, setAuthChecking] =
+    useState(true);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+
+    if (!storedUser) {
+      navigate("/login", { replace: true });
+      return;
+    }
+
+    try {
+      const parsedUser = JSON.parse(storedUser);
+
+      if (!parsedUser || !parsedUser.id) {
+        localStorage.removeItem("user");
+        navigate("/login", { replace: true });
+        return;
+      }
+
+      setIsAuthenticated(true);
+    } catch (error) {
+      console.error(
+        "Could not read logged-in user:",
+        error
+      );
+
+      localStorage.removeItem("user");
+      navigate("/login", { replace: true });
+    } finally {
+      setAuthChecking(false);
+    }
+  }, [navigate]);
+
+  // ========================================
   // STATES
   // ========================================
 
@@ -92,7 +135,7 @@ function Conversation() {
   // ========================================
 
   useEffect(() => {
-    if (!scenario) {
+    if (!isAuthenticated || !scenario) {
       return;
     }
 
@@ -118,11 +161,9 @@ function Conversation() {
           `${API_URL}/api/ai/questions`,
           {
             method: "POST",
-
             headers: {
               "Content-Type": "application/json",
             },
-
             body: JSON.stringify({
               scenario: scenarioId,
               level: scenario.level,
@@ -161,10 +202,6 @@ function Conversation() {
               "AI questions could not be loaded."
           );
         }
-
-        // ========================================
-        // GET QUESTIONS
-        // ========================================
 
         const generatedQuestions =
           data.questions || [];
@@ -264,10 +301,19 @@ function Conversation() {
             TOTAL_QUESTIONS
           );
 
-        console.log("========================================");
-        console.log("FINAL 20 QUESTIONS:");
+        console.log(
+          "========================================"
+        );
+
+        console.log(
+          "FINAL 20 QUESTIONS:"
+        );
+
         console.log(finalQuestions);
-        console.log("========================================");
+
+        console.log(
+          "========================================"
+        );
 
         setQuestions(finalQuestions);
       } catch (error) {
@@ -285,7 +331,7 @@ function Conversation() {
     };
 
     loadQuestions();
-  }, [scenarioId]);
+  }, [scenarioId, isAuthenticated]);
 
   // ========================================
   // TEXT TO SPEECH
@@ -510,10 +556,6 @@ function Conversation() {
         error
       );
 
-      // ========================================
-      // FALLBACK SCORE
-      // ========================================
-
       const fallbackScore =
         answer.trim().length >= 5
           ? 80
@@ -548,10 +590,6 @@ function Conversation() {
       updatedScores
     );
 
-    // ========================================
-    // MORE QUESTIONS
-    // ========================================
-
     if (
       currentStep <
       questions.length - 1
@@ -574,10 +612,6 @@ function Conversation() {
 
       return;
     }
-
-    // ========================================
-    // LAST QUESTION
-    // ========================================
 
     finishPractice(
       updatedScores
@@ -815,6 +849,40 @@ function Conversation() {
       setIsSaving(false);
     }
   };
+
+  // ========================================
+  // AUTH CHECK LOADING
+  // ========================================
+
+  if (authChecking) {
+    return (
+      <div className="conversation-page">
+        <main className="conversation-main">
+          <div className="conversation-practice-card loading-card">
+            <div className="loading-icon">
+              🔐
+            </div>
+
+            <h2>
+              Checking your account...
+            </h2>
+
+            <p>
+              Please wait a moment.
+            </p>
+          </div>
+        </main>
+      </div>
+    );
+  }
+
+  // ========================================
+  // NOT AUTHENTICATED
+  // ========================================
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   // ========================================
   // INVALID SCENARIO
